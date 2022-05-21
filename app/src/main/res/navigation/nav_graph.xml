@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.neobre.architecturedemo.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_mvcFragment"
+            app:destination="@id/mvcFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_mvpFragment"
+            app:destination="@id/mvpFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_vipFragment"
+            app:destination="@id/vipFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_mvvmFragment"
+            app:destination="@id/mvvmFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mvcFragment"
+        android:name="com.neobre.architecturedemo.mvc.MvcFragment"
+        android:label="fragment_mvc"
+        tools:layout="@layout/fragment_mvc" />
+    <fragment
+        android:id="@+id/mvpFragment"
+        android:name="com.neobre.architecturedemo.mvp.view.MvpFragment"
+        android:label="fragment_mvp"
+        tools:layout="@layout/fragment_mvp" />
+    <fragment
+        android:id="@+id/vipFragment"
+        android:name="com.neobre.architecturedemo.vip.VipFragment"
+        android:label="fragment_vip"
+        tools:layout="@layout/fragment_vip" />
+    <fragment
+        android:id="@+id/mvvmFragment"
+        android:name="com.neobre.architecturedemo.mvvm.MvvmFragment"
+        android:label="fragment_mvvm"
+        tools:layout="@layout/fragment_mvvm" />
+</navigation>
