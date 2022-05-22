@@ -1,21 +1,13 @@
 package com.neobre.architecturedemo.mvvm
 
-import android.os.Handler
-import android.os.Looper
-import com.neobre.architecturedemo.mvp.MvpContract
+import kotlinx.coroutines.delay
 
-class MvvmModel : MvpContract.Model {
-    override var retryCount: Int = 0
-        private set
+class MvvmModel {
+    private var retryCount: Int = 0
 
-
-    override fun addRetryCount(onUpdatedListener: MvpContract.Model.OnUpdatedListener?) {
-        Handler(Looper.getMainLooper()).postDelayed(
-            {
-                retryCount++
-                onUpdatedListener?.onUpdated(retryCount)
-            },
-            500,
-        )
+    suspend fun addRetryCount(): Int {
+        delay(500)
+        retryCount++
+        return retryCount
     }
 }

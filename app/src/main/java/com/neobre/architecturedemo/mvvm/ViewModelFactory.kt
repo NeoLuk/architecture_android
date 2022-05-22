@@ -3,10 +3,10 @@ package com.neobre.architecturedemo.mvvm
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-class ViewModelFactory(private val repo: Int) : ViewModelProvider.Factory {
+class ViewModelFactory(private val repo: MvvmRepository) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MvvmViewModel::class.java)) {
             return MvvmViewModel(repo) as T
         }

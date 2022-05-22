@@ -1,11 +1,8 @@
 package com.neobre.architecturedemo.mvvm
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -19,7 +16,7 @@ class MvvmFragment : Fragment(R.layout.fragment_mvvm) {
     private lateinit var textCount: TextView
     private lateinit var loadingBar: ProgressBar
 
-    private val viewModel: MvvmViewModel by viewModels { ViewModelFactory(1) }
+    private val viewModel: MvvmViewModel by viewModels { ViewModelFactory(MvvmRepository(MvvmModel())) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,29 +27,33 @@ class MvvmFragment : Fragment(R.layout.fragment_mvvm) {
 
         setupView()
 
-        viewModel.retryCount.observe(viewLifecycleOwner) {
-
+        viewModel.uiState.observe(viewLifecycleOwner) {
+            if (it.isReachLimit) {
+                showRetryLimitDialog()
+            } else {
+                updateCountText(it.retryCount)
+                showLoading(it.loading)
+            }
         }
     }
 
 
     private fun setupView() {
-//        presenter.initCount()
         button.setOnClickListener {
             viewModel.onRetryClick()
         }
     }
 
-    fun showLoading(loading: Boolean) {
+    private fun showLoading(loading: Boolean) {
         loadingBar.visibility = if (loading) View.VISIBLE else View.INVISIBLE
         button.isEnabled = !loading
     }
 
-    fun updateCountText(countText: String) {
+    private fun updateCountText(countText: String) {
         textCount.text = countText
     }
 
-    fun showRetryLimitDialog() {
+    private fun showRetryLimitDialog() {
         requireContext().showRetryLimitReached { findNavController().popBackStack() }
     }
 }
