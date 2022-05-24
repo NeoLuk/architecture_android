@@ -1,4 +1,4 @@
-package com.neobre.architecturedemo
+package com.neobre.architecturedemo.util
 
 import android.app.AlertDialog
 import android.content.Context

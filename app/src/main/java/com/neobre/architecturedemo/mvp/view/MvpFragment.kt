@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.neobre.architecturedemo.R
 import com.neobre.architecturedemo.mvp.MvpContract
 import com.neobre.architecturedemo.mvp.presenter.MvpPresenter
-import com.neobre.architecturedemo.showRetryLimitReached
+import com.neobre.architecturedemo.util.showRetryLimitReached
 
 
 class MvpFragment : Fragment(R.layout.fragment_mvp), MvpContract.View {

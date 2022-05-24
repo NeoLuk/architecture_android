@@ -1,10 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".mvvm.MvvmFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <include layout="@layout/layout_game_view" />
+    <data>
 
-</FrameLayout>
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.neobre.architecturedemo.mvvm.MvvmViewModel" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/vTextCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="24dp"
+            android:text="@{viewModel.count}"
+            android:textSize="56sp" />
+
+        <ProgressBar
+            android:id="@+id/vLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.loading ? View.VISIBLE : View.INVISIBLE}" />
+
+        <Button
+            android:id="@+id/vRetryBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.onRetryClick()}"
+            android:text="@string/general_retry" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

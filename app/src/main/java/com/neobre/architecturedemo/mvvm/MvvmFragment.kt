@@ -1,59 +1,31 @@
 package com.neobre.architecturedemo.mvvm
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.fragment.app.Fragment
 import android.view.View
-import android.widget.Button
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.neobre.architecturedemo.R
-import com.neobre.architecturedemo.showRetryLimitReached
+import com.neobre.architecturedemo.databinding.FragmentMvvmBinding
 
-class MvvmFragment : Fragment(R.layout.fragment_mvvm) {
-    private lateinit var button: Button
-    private lateinit var textCount: TextView
-    private lateinit var loadingBar: ProgressBar
+class MvvmFragment : Fragment() {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        val viewModel: MvvmViewModel by viewModels { ViewModelFactory(MvvmRepository(MvvmModel(0))) }
 
-    private val viewModel: MvvmViewModel by viewModels { ViewModelFactory(MvvmRepository(MvvmModel())) }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        button = view.findViewById(R.id.vRetryBtn)
-        textCount = view.findViewById(R.id.vTextCount)
-        loadingBar = view.findViewById(R.id.vLoading)
-
-        setupView()
-
-        viewModel.uiState.observe(viewLifecycleOwner) {
-            if (it.isReachLimit) {
-                showRetryLimitDialog()
-            } else {
-                updateCountText(it.retryCount)
-                showLoading(it.loading)
-            }
-        }
-    }
-
-
-    private fun setupView() {
-        button.setOnClickListener {
-            viewModel.onRetryClick()
-        }
-    }
-
-    private fun showLoading(loading: Boolean) {
-        loadingBar.visibility = if (loading) View.VISIBLE else View.INVISIBLE
-        button.isEnabled = !loading
-    }
-
-    private fun updateCountText(countText: String) {
-        textCount.text = countText
-    }
-
-    private fun showRetryLimitDialog() {
-        requireContext().showRetryLimitReached { findNavController().popBackStack() }
+        return DataBindingUtil.inflate<FragmentMvvmBinding?>(
+            inflater,
+            R.layout.fragment_mvvm,
+            container,
+            false
+        ).also {
+            it.viewModel = viewModel
+            it.lifecycleOwner = this
+        }.root
     }
 }

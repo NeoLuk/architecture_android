@@ -7,31 +7,21 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
 class MvvmViewModel(private val repo: MvvmRepository) : ViewModel() {
-    private val _uiState = MutableLiveData(MvvmUIState(
-        retryCount = "count: 0",
-        loading = false,
-        isReachLimit = false
-    ))
-    val uiState: LiveData<MvvmUIState>
-        get() = _uiState
+    private val _count = MutableLiveData(0)
+    val count: LiveData<Int>
+        get() = _count
 
+    private val _loading = MutableLiveData(false)
+    val loading: LiveData<Boolean>
+        get() = _loading
 
 
     fun onRetryClick() {
-        _uiState.value = _uiState.value?.copy(loading = true)
+        _loading.value = true
         viewModelScope.launch {
-            val count =  repo.onRetryClick()
-            _uiState.value = MvvmUIState(
-                loading = false,
-                retryCount = "count: $count",
-                isReachLimit = count > 3
-            )
+            val count = repo.onRetryClick()
+            _count.value = count
+            _loading.value = false
         }
     }
 }
-
-data class MvvmUIState(
-    val retryCount: String,
-    val loading: Boolean,
-    val isReachLimit: Boolean
-)

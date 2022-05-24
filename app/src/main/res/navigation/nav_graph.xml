@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_mainFragment_to_mvvmFragment"
             app:destination="@id/mvvmFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_mviFragment"
+            app:destination="@id/mviFragment" />
     </fragment>
     <fragment
         android:id="@+id/mvcFragment"
@@ -43,4 +46,9 @@
         android:name="com.neobre.architecturedemo.mvvm.MvvmFragment"
         android:label="fragment_mvvm"
         tools:layout="@layout/fragment_mvvm" />
+    <fragment
+        android:id="@+id/mviFragment"
+        android:name="com.neobre.architecturedemo.mvi.MviFragment"
+        android:label="fragment_mvi"
+        tools:layout="@layout/fragment_mvi" />
 </navigation>

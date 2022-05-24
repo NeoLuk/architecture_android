@@ -8,7 +8,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.neobre.architecturedemo.R
-import com.neobre.architecturedemo.showRetryLimitReached
+import com.neobre.architecturedemo.util.showRetryLimitReached
 import java.util.*
 
 class MvcFragment : Fragment(R.layout.fragment_mvc), Observer {
