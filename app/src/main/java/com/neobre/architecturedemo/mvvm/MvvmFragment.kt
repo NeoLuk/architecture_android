@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.neobre.architecturedemo.R
 import com.neobre.architecturedemo.databinding.FragmentMvvmBinding
+import com.neobre.architecturedemo.util.ViewModelFactory
 
 class MvvmFragment : Fragment() {
     override fun onCreateView(

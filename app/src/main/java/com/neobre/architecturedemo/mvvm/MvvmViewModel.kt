@@ -17,8 +17,8 @@ class MvvmViewModel(private val repo: MvvmRepository) : ViewModel() {
 
 
     fun onRetryClick() {
-        _loading.value = true
         viewModelScope.launch {
+            _loading.value = true
             val count = repo.onRetryClick()
             _count.value = count
             _loading.value = false

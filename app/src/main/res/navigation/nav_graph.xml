@@ -33,7 +33,7 @@
         tools:layout="@layout/fragment_mvc" />
     <fragment
         android:id="@+id/mvpFragment"
-        android:name="com.neobre.architecturedemo.mvp.view.MvpFragment"
+        android:name="com.neobre.architecturedemo.mvp.MvpFragment"
         android:label="fragment_mvp"
         tools:layout="@layout/fragment_mvp" />
     <fragment

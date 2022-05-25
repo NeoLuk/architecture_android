@@ -1,7 +1,4 @@
-package com.neobre.architecturedemo.mvp.presenter
-
-import com.neobre.architecturedemo.mvp.MvpContract
-import com.neobre.architecturedemo.mvp.model.MvpModel
+package com.neobre.architecturedemo.mvp
 
 class MvpPresenter(
     private val view: MvpContract.View,

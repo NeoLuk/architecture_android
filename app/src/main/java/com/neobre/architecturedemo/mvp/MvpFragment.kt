@@ -1,4 +1,4 @@
-package com.neobre.architecturedemo.mvp.view
+package com.neobre.architecturedemo.mvp
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.neobre.architecturedemo.R
 import com.neobre.architecturedemo.mvp.MvpContract
-import com.neobre.architecturedemo.mvp.presenter.MvpPresenter
+import com.neobre.architecturedemo.mvp.MvpPresenter
 import com.neobre.architecturedemo.util.showRetryLimitReached
 
 

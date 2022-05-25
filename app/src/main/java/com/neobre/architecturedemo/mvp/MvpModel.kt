@@ -1,4 +1,4 @@
-package com.neobre.architecturedemo.mvp.model
+package com.neobre.architecturedemo.mvp
 
 import android.os.Handler
 import android.os.Looper

@@ -2,7 +2,6 @@ package com.neobre.architecturedemo.mvp
 
 import android.os.Handler
 import android.os.Looper
-import com.neobre.architecturedemo.mvp.model.MvpModel
 import io.mockk.*
 import io.mockk.impl.annotations.RelaxedMockK
 import org.junit.Assert

@@ -45,7 +45,7 @@ class MvcFragment : Fragment(R.layout.fragment_mvc), Observer {
 
     private fun updateCountText(count: Int) {
         // hard to tell where to put this logic.
-        textCount.text = "count: $count"
+        textCount.text = getString(R.string.count_text, count)
     }
 
     override fun update(o: Observable?, arg: Any?) {

@@ -1,6 +1,7 @@
 package com.neobre.architecturedemo.mvp.presenter
 
 import com.neobre.architecturedemo.mvp.MvpContract
+import com.neobre.architecturedemo.mvp.MvpPresenter
 import io.mockk.*
 import io.mockk.impl.annotations.RelaxedMockK
 
