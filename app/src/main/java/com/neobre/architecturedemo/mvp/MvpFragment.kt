@@ -27,13 +27,14 @@ class MvpFragment : Fragment(R.layout.fragment_mvp), MvpContract.View {
         textCount = view.findViewById(R.id.vTextCount)
         loadingBar = view.findViewById(R.id.vLoading)
 
-        presenter = MvpPresenter(this)
+        presenter = MvpPresenter(this).also {
+            it.initCount()
+        }
 
         setupView()
     }
 
     private fun setupView() {
-        presenter.initCount()
         button.setOnClickListener {
             presenter.onRetryClick()
         }

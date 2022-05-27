@@ -22,6 +22,7 @@ class MvvmViewModel(private val repo: MvvmRepository) : ViewModel() {
             val count = repo.onRetryClick()
             _count.value = count
             _loading.value = false
+            mapOf(1 to 0).toMutableMap()
         }
     }
 }

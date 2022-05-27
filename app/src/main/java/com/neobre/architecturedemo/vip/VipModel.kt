@@ -1,4 +1,3 @@
 package com.neobre.architecturedemo.vip
 
-class VipModel {
-}
+data class VipModel(var retryCount: Int = 0)
