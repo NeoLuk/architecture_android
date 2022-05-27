@@ -1,24 +1,28 @@
 package com.neobre.architecturedemo.vip
 
+
 interface VipContract {
     interface View {
-        fun setScore(score: String)
-    }
-
-    interface Router {
-        fun goToResult()
+        fun showLoading(loading: Boolean)
+        fun updateCountText(countText: String)
+        fun showRetryLimitDialog()
     }
 
     interface Presenter {
-        fun presentScore(score: String)
+        fun initCount()
+        suspend fun onRetryClick()
+        fun onDialogClick()
     }
 
     interface Interactor {
-        fun loadScore()
+        interface OnUpdatedListener {
+            fun onUpdated(count: Int)
+        }
+
+        suspend fun addRetryCount(onUpdatedListener: OnUpdatedListener?)
     }
 
-    interface Repository {
-        fun loadScore()
+    interface Router {
+        fun back()
     }
-
 }

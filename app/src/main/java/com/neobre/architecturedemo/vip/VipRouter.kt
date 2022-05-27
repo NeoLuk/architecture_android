@@ -1,4 +1,9 @@
 package com.neobre.architecturedemo.vip
 
-class VipRouter {
+import androidx.navigation.NavController
+
+class VipRouter(private val navController: NavController) : VipContract.Router {
+    override fun back() {
+        navController.popBackStack()
+    }
 }
