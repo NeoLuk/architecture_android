@@ -26,14 +26,14 @@ class MvpPresenterTest {
 
     @Test
     fun `onUpdated success`() {
-        every { view.showLoading(any()) } just runs
+        every { view.setLoading(any()) } just runs
         every { model.addRetryCount(any()) } just runs
 
     }
 
     @Test
     fun onUpdated() {
-        every { view.showLoading(any()) } just runs
+        every { view.setLoading(any()) } just runs
         every { model.addRetryCount(any()) } just runs
 
     }
@@ -54,13 +54,13 @@ class MvpPresenterTest {
 
     @Test
     fun onRetryClick() {
-        every { view.showLoading(any()) } just runs
+        every { view.setLoading(any()) } just runs
         every { model.addRetryCount(any()) } just runs
 
         presenter.onRetryClick()
 
         verifySequence {
-            view.showLoading(true)
+            view.setLoading(true)
             model.addRetryCount(presenter)
         }
     }

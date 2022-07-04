@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.neobre.architecturedemo.R
@@ -31,6 +32,11 @@ class MvcFragment : Fragment(R.layout.fragment_mvc), Observer {
         model.addObserver(this)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        model.deleteObservers()
+    }
+
     private fun setupView() {
         updateCountText(model.retryCount)
         button.setOnClickListener {
@@ -40,7 +46,7 @@ class MvcFragment : Fragment(R.layout.fragment_mvc), Observer {
     }
 
     private fun setLoading(loading: Boolean) {
-        loadingBar.isVisible = loading
+        loadingBar.isInvisible = !loading
         button.isEnabled = !loading
     }
 

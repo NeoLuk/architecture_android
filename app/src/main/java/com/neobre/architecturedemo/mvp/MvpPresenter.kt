@@ -6,7 +6,7 @@ class MvpPresenter(
 ) : MvpContract.Presenter, MvpContract.Model.OnUpdatedListener {
 
     override fun onUpdated(count: Int) {
-        view.showLoading(false)
+        view.setLoading(false)
         if (count > 3) {
             view.showRetryLimitDialog()
         } else {
@@ -15,12 +15,12 @@ class MvpPresenter(
     }
 
     override fun initCount() {
-        view.updateCountText("count: ${model.retryCount}")
+        view.updateCountText("count: ${model.getRetryCount()}")
     }
 
 
     override fun onRetryClick() {
-        view.showLoading(true)
+        view.setLoading(true)
         model.addRetryCount(this)
     }
 }

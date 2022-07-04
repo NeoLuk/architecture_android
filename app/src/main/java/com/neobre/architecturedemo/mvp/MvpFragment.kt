@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.view.isInvisible
 import androidx.navigation.fragment.findNavController
 import com.neobre.architecturedemo.R
 import com.neobre.architecturedemo.util.showRetryLimitDialog
@@ -16,7 +17,7 @@ class MvpFragment : Fragment(R.layout.fragment_mvp), MvpContract.View {
     private lateinit var textCount: TextView
     private lateinit var loadingBar: ProgressBar
 
-    private lateinit var presenter: MvpContract.Presenter
+    private var presenter: MvpContract.Presenter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -32,14 +33,19 @@ class MvpFragment : Fragment(R.layout.fragment_mvp), MvpContract.View {
         setupView()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter = null
+    }
+
     private fun setupView() {
         button.setOnClickListener {
-            presenter.onRetryClick()
+            presenter?.onRetryClick()
         }
     }
 
-    override fun showLoading(loading: Boolean) {
-        loadingBar.visibility = if (loading) View.VISIBLE else View.INVISIBLE
+    override fun setLoading(loading: Boolean) {
+        loadingBar.isInvisible = !loading
         button.isEnabled = !loading
     }
 

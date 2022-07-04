@@ -5,9 +5,9 @@ import android.os.Looper
 import com.neobre.architecturedemo.mvp.MvpContract
 
 class MvpModel : MvpContract.Model {
-    override var retryCount: Int = 0
-        private set
+    private var retryCount: Int = 0
 
+    override fun getRetryCount(): Int = retryCount
 
     override fun addRetryCount(onUpdatedListener: MvpContract.Model.OnUpdatedListener?) {
         Handler(Looper.getMainLooper()).postDelayed(

@@ -4,16 +4,15 @@ interface MvpContract {
     interface View {
         fun updateCountText(countText: String)
         fun showRetryLimitDialog()
-        fun showLoading(loading: Boolean)
+        fun setLoading(loading: Boolean)
     }
 
     interface Model {
-        val retryCount: Int
-
         interface OnUpdatedListener {
             fun onUpdated(count: Int)
         }
 
+        fun getRetryCount(): Int
         fun addRetryCount(onUpdatedListener: OnUpdatedListener?)
     }
 
