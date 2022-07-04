@@ -13,7 +13,7 @@ import com.neobre.architecturedemo.R
 import com.neobre.architecturedemo.mvvm.MvvmModel
 import com.neobre.architecturedemo.mvvm.MvvmRepository
 import com.neobre.architecturedemo.util.ViewModelFactory
-import com.neobre.architecturedemo.util.showRetryLimitReached
+import com.neobre.architecturedemo.util.showRetryLimitDialog
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -70,7 +70,7 @@ class MviFragment : Fragment(R.layout.fragment_mvi) {
                     }
                     is MviViewState.ReachLimit -> {
                         showLoading(false)
-                        requireContext().showRetryLimitReached { findNavController().popBackStack() }
+                        requireContext().showRetryLimitDialog { findNavController().popBackStack() }
                     }
                 }
             }

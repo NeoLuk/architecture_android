@@ -3,7 +3,7 @@ package com.neobre.architecturedemo.util
 import android.app.AlertDialog
 import android.content.Context
 
-fun Context.showRetryLimitReached(callback: () -> Unit) {
+fun Context.showRetryLimitDialog(callback: () -> Unit) {
     AlertDialog.Builder(this)
         .setTitle("Warning!")
         .setMessage("Reached retry limit, please contact support!")

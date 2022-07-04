@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.neobre.architecturedemo.R
-import com.neobre.architecturedemo.util.showRetryLimitReached
+import com.neobre.architecturedemo.util.showRetryLimitDialog
 import kotlinx.coroutines.launch
 
 
@@ -56,6 +56,6 @@ class VipFragment : Fragment(R.layout.fragment_vip), VipContract.View {
     }
 
     override fun showRetryLimitDialog() {
-        requireContext().showRetryLimitReached { presenter.onDialogClick() }
+        requireContext().showRetryLimitDialog { presenter.onDialogClick() }
     }
 }

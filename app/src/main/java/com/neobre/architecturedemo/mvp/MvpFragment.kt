@@ -8,9 +8,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.neobre.architecturedemo.R
-import com.neobre.architecturedemo.mvp.MvpContract
-import com.neobre.architecturedemo.mvp.MvpPresenter
-import com.neobre.architecturedemo.util.showRetryLimitReached
+import com.neobre.architecturedemo.util.showRetryLimitDialog
 
 
 class MvpFragment : Fragment(R.layout.fragment_mvp), MvpContract.View {
@@ -50,6 +48,6 @@ class MvpFragment : Fragment(R.layout.fragment_mvp), MvpContract.View {
     }
 
     override fun showRetryLimitDialog() {
-        requireContext().showRetryLimitReached { findNavController().popBackStack() }
+        requireContext().showRetryLimitDialog { findNavController().popBackStack() }
     }
 }

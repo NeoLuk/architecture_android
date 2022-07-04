@@ -8,7 +8,7 @@ import com.neobre.architecturedemo.R
 @BindingAdapter("android:text")
 fun setCountText(view: TextView, count: Int) {
     if (count > 3) {
-        view.context.showRetryLimitReached {
+        view.context.showRetryLimitDialog {
             view.findNavController().popBackStack()
         }
     } else {
