@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -46,8 +47,8 @@ class VipFragment : Fragment(R.layout.fragment_vip), VipContract.View {
         }
     }
 
-    override fun showLoading(loading: Boolean) {
-        loadingBar.visibility = if (loading) View.VISIBLE else View.INVISIBLE
+    override fun setLoading(loading: Boolean) {
+        loadingBar.isInvisible = !loading
         button.isEnabled = !loading
     }
 

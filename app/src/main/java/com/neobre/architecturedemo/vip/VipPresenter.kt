@@ -7,7 +7,7 @@ class VipPresenter(
 ) : VipContract.Presenter, VipContract.Interactor.OnUpdatedListener {
 
     override fun onUpdated(count: Int) {
-        view.showLoading(false)
+        view.setLoading(false)
         if (count > 3) {
             view.showRetryLimitDialog()
         } else {
@@ -20,7 +20,7 @@ class VipPresenter(
     }
 
     override suspend fun onRetryClick() {
-        view.showLoading(true)
+        view.setLoading(true)
         interactor.addRetryCount(this)
     }
 

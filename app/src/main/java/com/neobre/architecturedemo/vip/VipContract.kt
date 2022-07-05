@@ -3,7 +3,7 @@ package com.neobre.architecturedemo.vip
 
 interface VipContract {
     interface View {
-        fun showLoading(loading: Boolean)
+        fun setLoading(loading: Boolean)
         fun updateCountText(countText: String)
         fun showRetryLimitDialog()
     }

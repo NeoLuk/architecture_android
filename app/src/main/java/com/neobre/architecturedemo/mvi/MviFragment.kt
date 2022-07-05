@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.view.isInvisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -31,9 +32,8 @@ class MviFragment : Fragment(R.layout.fragment_mvi) {
         textCount = view.findViewById(R.id.vTextCount)
         loadingBar = view.findViewById(R.id.vLoading)
 
-
         setupView()
-        observeViewModel()
+        observeViewState()
     }
 
     private fun setupView() {
@@ -44,32 +44,31 @@ class MviFragment : Fragment(R.layout.fragment_mvi) {
         }
     }
 
-    private fun showLoading(loading: Boolean = true) {
-        loadingBar.visibility = if (loading) View.VISIBLE else View.INVISIBLE
+    private fun setLoading(loading: Boolean) {
+        loadingBar.isInvisible = !loading
         button.isEnabled = !loading
     }
 
     private fun updateCountText(count: Int) {
-        // hard to tell where to put this logic.
         textCount.text = getString(R.string.count_text, count)
     }
 
-    private fun observeViewModel() {
+    private fun observeViewState() {
         lifecycleScope.launch {
             viewModel.viewState.collect {
                 when (it) {
                     is MviViewState.Count -> {
-                        showLoading(false)
+                        setLoading(false)
                         updateCountText(it.count)
                     }
-                    is MviViewState.Idle -> {
+                    is MviViewState.Init -> {
                         updateCountText(0)
                     }
                     is MviViewState.Loading -> {
-                        showLoading(true)
+                        setLoading(true)
                     }
                     is MviViewState.ReachLimit -> {
-                        showLoading(false)
+                        setLoading(false)
                         requireContext().showRetryLimitDialog { findNavController().popBackStack() }
                     }
                 }
