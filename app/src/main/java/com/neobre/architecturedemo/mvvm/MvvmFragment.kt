@@ -17,7 +17,8 @@ class MvvmFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val viewModel: MvvmViewModel by viewModels { ViewModelFactory(MvvmRepository(MvvmModel(0))) }
+
+        val viewModel: MvvmViewModel by viewModels { ViewModelFactory(MvvmRepository(MvvmDataSource())) }
 
         return DataBindingUtil.inflate<FragmentMvvmBinding?>(
             inflater,
@@ -25,8 +26,8 @@ class MvvmFragment : Fragment() {
             container,
             false
         ).also {
+            it.lifecycleOwner = viewLifecycleOwner
             it.viewModel = viewModel
-            it.lifecycleOwner = this
         }.root
     }
 }

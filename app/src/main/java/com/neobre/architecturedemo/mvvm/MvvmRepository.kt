@@ -1,11 +1,8 @@
 package com.neobre.architecturedemo.mvvm
 
-import kotlinx.coroutines.delay
 
-class MvvmRepository(private val model: MvvmModel) {
+class MvvmRepository(private val model: MvvmDataSource) {
     suspend fun onRetryClick(): Int {
-        delay(500)
-        model.retryCount++
-        return model.retryCount
+        return model.addRetryCount()
     }
 }

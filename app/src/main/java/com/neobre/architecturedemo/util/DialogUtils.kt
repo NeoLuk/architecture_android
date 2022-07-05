@@ -5,6 +5,7 @@ import android.content.Context
 
 fun Context.showRetryLimitDialog(callback: () -> Unit) {
     AlertDialog.Builder(this)
+        .setCancelable(false)
         .setTitle("Warning!")
         .setMessage("Reached retry limit, please contact support!")
         .setPositiveButton("Back") { _, _ -> callback() }

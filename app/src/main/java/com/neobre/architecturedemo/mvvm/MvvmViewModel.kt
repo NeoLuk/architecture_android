@@ -8,21 +8,18 @@ import kotlinx.coroutines.launch
 
 class MvvmViewModel(private val repo: MvvmRepository) : ViewModel() {
     private val _count = MutableLiveData(0)
-    val count: LiveData<Int>
-        get() = _count
+    val count: LiveData<Int> = _count
 
+    // better use Channel and SharedFlow in real project for one time events.
     private val _loading = MutableLiveData(false)
-    val loading: LiveData<Boolean>
-        get() = _loading
+    val loading: LiveData<Boolean> = _loading
 
 
     fun onRetryClick() {
         viewModelScope.launch {
             _loading.value = true
-            val count = repo.onRetryClick()
-            _count.value = count
+            _count.value = repo.onRetryClick()
             _loading.value = false
-            mapOf(1 to 0).toMutableMap()
         }
     }
 }

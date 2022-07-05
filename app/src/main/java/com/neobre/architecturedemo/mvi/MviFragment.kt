@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.neobre.architecturedemo.R
-import com.neobre.architecturedemo.mvvm.MvvmModel
+import com.neobre.architecturedemo.mvvm.MvvmDataSource
 import com.neobre.architecturedemo.mvvm.MvvmRepository
 import com.neobre.architecturedemo.util.ViewModelFactory
 import com.neobre.architecturedemo.util.showRetryLimitDialog
@@ -22,7 +22,7 @@ class MviFragment : Fragment(R.layout.fragment_mvi) {
     private lateinit var textCount: TextView
     private lateinit var loadingBar: ProgressBar
 
-    private val viewModel: MviViewModel by viewModels { ViewModelFactory(MvvmRepository(MvvmModel(0))) }
+    private val viewModel: MviViewModel by viewModels { ViewModelFactory(MvvmRepository(MvvmDataSource())) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
