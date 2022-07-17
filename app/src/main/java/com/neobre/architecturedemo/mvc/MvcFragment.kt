@@ -7,7 +7,6 @@ import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.view.isInvisible
-import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.neobre.architecturedemo.R
 import com.neobre.architecturedemo.util.showRetryLimitDialog
@@ -22,6 +21,7 @@ class MvcFragment : Fragment(R.layout.fragment_mvc), Observer {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        model.addObserver(this)
 
         button = view.findViewById(R.id.vRetryBtn)
         textCount = view.findViewById(R.id.vTextCount)
@@ -29,16 +29,15 @@ class MvcFragment : Fragment(R.layout.fragment_mvc), Observer {
 
         setupView()
 
-        model.addObserver(this)
+        model.initCount()
     }
 
     override fun onDestroy() {
+        model.deleteObserver(this)
         super.onDestroy()
-        model.deleteObservers()
     }
 
     private fun setupView() {
-        updateCountText(model.retryCount)
         button.setOnClickListener {
             setLoading(true)
             model.addRetryCount()
@@ -55,9 +54,8 @@ class MvcFragment : Fragment(R.layout.fragment_mvc), Observer {
     }
 
     override fun update(o: Observable?, arg: Any?) {
-        if (model.retryCount > 3) return requireContext().showRetryLimitDialog { findNavController().popBackStack() }
+        if (model.isRetryBlocked()) return requireContext().showRetryLimitDialog { findNavController().popBackStack() }
         updateCountText(model.retryCount)
         setLoading(false)
     }
-
 }

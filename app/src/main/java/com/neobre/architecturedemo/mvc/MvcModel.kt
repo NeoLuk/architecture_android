@@ -9,7 +9,10 @@ class MvcModel : Observable() {
     var retryCount: Int = 0
         private set
 
+    fun isRetryBlocked(): Boolean = retryCount > 3
+
     fun addRetryCount() {
+        // simulate api call
         Handler(Looper.getMainLooper()).postDelayed(
             {
                 retryCount++
@@ -19,4 +22,10 @@ class MvcModel : Observable() {
             500,
         )
     }
+
+    fun initCount() {
+        setChanged()
+        notifyObservers()
+    }
+
 }
